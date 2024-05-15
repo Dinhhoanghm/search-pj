@@ -1,0 +1,8 @@
+spring:
+  crawler:
+    url: https://community.ig.com/forums/forum/35-cryptocurrency-and-blockchain/
+    element-classname: entry-body
+    element-classname1: entry-title
+    source-path: /home/hoangdd/Downloads
+    file-name: /home/hoangdd/Downloads/test
+    element-classname2:  entry-meta
