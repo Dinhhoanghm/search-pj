@@ -1,11 +1,14 @@
 package vn.crawler.service;
 
+import lombok.extern.log4j.Log4j2;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.HtmlTreeBuilder;
 import org.jsoup.parser.Parser;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import vn.crawler.data.Article;
 import vn.crawler.repo.ArticleRepository;
@@ -14,8 +17,12 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
+
 @Service
-public class JsoupService {
+@Log4j2
+public class JsoupService implements IJsoupService {
+    private static final Logger log = LoggerFactory.getLogger(JsoupService.class);
     private final ArticleRepository articleRepository;
 
     public JsoupService(ArticleRepository articleRepository) {
@@ -28,7 +35,7 @@ public class JsoupService {
                 .parser(new Parser(new HtmlTreeBuilder()))
                 .get();
     }
-
+    @Override
     public List<Article> crawlData(String url) throws IOException {
         Document document = getDocument(url);
         Elements articles = document.getElementsByClass("ipsDataItem_main");
@@ -45,7 +52,8 @@ public class JsoupService {
                     try {
                         contentDocument = getDocument(titleElement.attr("href"));
                     } catch (IOException e) {
-                        throw new RuntimeException(e);
+                        log.info("cannot connect");
+                        return new Article();
                     }
                     Element contentElement = contentDocument.getElementsByClass("ipsType_normal ipsType_richText ipsPadding_bottom ipsContained")
                             .first();
@@ -64,7 +72,7 @@ public class JsoupService {
                 .collect(Collectors.toList());
         return article;
     }
-
+    @Override
     public List<Article> crawlNewData(String url) throws IOException {
         Document document = getDocument(url);
         Elements articles = document.getElementsByClass("td-module-meta-info");
@@ -81,7 +89,8 @@ public class JsoupService {
                     try {
                         contentDocument = getDocument(titleElement.select("a[href]").first().attr("href"));
                     } catch (IOException e) {
-                        throw new RuntimeException(e);
+                        log.info("cannot connect");
+                        return new Article();
                     }
                     Element contentElement = contentDocument.getElementsByClass("td-post-content tagdiv-type").first();
                     String content = contentElement != null ? contentElement.select("p").stream().map(p -> p.text())
@@ -98,7 +107,7 @@ public class JsoupService {
                 .collect(Collectors.toList());
         return article;
     }
-
+   @Override
     public List<Article> crawlNewData2(String url) throws IOException {
         Document document = getDocument(url);
         Elements articles = document.getElementsByClass("jeg_postblock_content");

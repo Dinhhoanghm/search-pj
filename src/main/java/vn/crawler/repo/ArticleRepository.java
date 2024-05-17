@@ -6,12 +6,13 @@ import vn.crawler.data.Article;
 
 import static crawler_2fdata.tables.Article.ARTICLE;
 @Repository
-public class ArticleRepository  {
+public class ArticleRepository  implements IArticleRepository {
 	private final DSLContext dslContext;
 
     public ArticleRepository(DSLContext dslContext) {
         this.dslContext = dslContext;
     }
+	@Override
 	public void insert(Article article) {
 		dslContext.insertInto(ARTICLE)
                 .set(ARTICLE.TITLE, article.getTitle())

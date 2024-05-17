@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 import vn.crawler.data.Article;
 import vn.crawler.data.CrawlerRequest;
+import vn.crawler.service.IJsoupService;
 import vn.crawler.service.JsoupService;
 
 import java.io.BufferedWriter;
@@ -17,7 +18,7 @@ import static vn.crawler.config.json.Json.encode;
 @Service
 @Configuration
 public class CrawlWeb {
-    private final JsoupService jsoupService;
+    private final IJsoupService jsoupService;
     private final CrawlerRequest crawlerRequest;
 
     public CrawlWeb(JsoupService jsoupService, CrawlerRequest crawlerRequest) {
@@ -52,7 +53,7 @@ public class CrawlWeb {
 //        System.out.println("success");
 //    }
 
-//    @PostConstruct
+    //    @PostConstruct
 //    public void crawlerNewWeb() throws IOException {
 //
 //        List<Article> articles = jsoupService.crawlNewData2(crawlerRequest.getUrl3());
