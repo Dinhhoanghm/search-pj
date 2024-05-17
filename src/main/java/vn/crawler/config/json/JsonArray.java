@@ -1,7 +1,7 @@
-package vn.cuong.crawler.json;
+package vn.crawler.config.json;
 
 import lombok.extern.log4j.Log4j2;
-import vn.cuong.crawler.jackson.JsonMapper;
+import vn.crawler.config.jackson.JsonMapper;
 
 import java.time.Instant;
 import java.util.*;

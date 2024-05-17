@@ -1,9 +1,9 @@
-package vn.cuong.crawler.json;
+package vn.crawler.config.json;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
-import vn.cuong.crawler.jackson.JsonMapper;
+import vn.crawler.config.jackson.JsonMapper;
 
 import java.util.LinkedHashMap;
 import java.util.List;

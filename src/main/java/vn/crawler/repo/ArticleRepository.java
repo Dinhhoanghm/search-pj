@@ -1,8 +1,8 @@
-package vn.cuong.crawler.repo;
+package vn.crawler.repo;
 
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
-import vn.cuong.crawler.data.Article;
+import vn.crawler.data.Article;
 
 import static crawler_2fdata.tables.Article.ARTICLE;
 @Repository

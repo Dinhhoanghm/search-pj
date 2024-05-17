@@ -1,4 +1,4 @@
-package vn.cuong.crawler.exception;
+package vn.crawler.config.exception;
 
 public class DecodeException extends RuntimeException {
 

@@ -1,10 +1,10 @@
-package vn.cuong.crawler.json;
+package vn.crawler.config.json;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import vn.cuong.crawler.exception.DecodeException;
-import vn.cuong.crawler.exception.EncodeException;
-import vn.cuong.crawler.jackson.JsonMapper;
+import vn.crawler.config.exception.DecodeException;
+import vn.crawler.config.exception.EncodeException;
+import vn.crawler.config.jackson.JsonMapper;
 
 import java.util.Iterator;
 import java.util.stream.Stream;

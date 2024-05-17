@@ -1,4 +1,4 @@
-package vn.cuong.crawler;
+package vn.crawler;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

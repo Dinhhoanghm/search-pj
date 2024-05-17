@@ -1,6 +1,8 @@
 spring:
   crawler:
-    url: https://community.ig.com/forums/forum/35-cryptocurrency-and-blockchain/
+    url: https://www.the-blockchain.com/?s=blockchain
+    url2: https://www.the-blockchain.com/?s=blockchain
+    url3: https://www.newsbtc.com/?s=blockchain
     element-classname: entry-body
     element-classname1: entry-title
     source-path: /home/hoangdd/Downloads

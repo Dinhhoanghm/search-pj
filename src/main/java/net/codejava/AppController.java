@@ -15,44 +15,44 @@ import java.util.List;
 @Controller
 public class AppController {
 	@Autowired
-	private ProductService service;
+	private ArticleService service;
 	
 	@RequestMapping("/")
 	public String viewHomePage(Model model, @Param("keyword") String keyword) {
-		List<Product> listProducts = service.listAll(keyword);
-		model.addAttribute("listProducts", listProducts);
+		List<Article> listArticles = service.listAll(keyword);
+		model.addAttribute("listArticles", listArticles);
 		model.addAttribute("keyword", keyword);
 		
 		return "index";
 	}
 	
 	@RequestMapping("/new")
-	public String showNewProductForm(Model model) {
-		Product product = new Product();
-		model.addAttribute("product", product);
+	public String showNewArticleForm(Model model) {
+		Article article = new Article();
+		model.addAttribute("article", article);
 		
-		return "new_product";
+		return "new_article";
 	}
 	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String saveProduct(@ModelAttribute("product") Product product) {
-		service.save(product);
+	public String saveArticle(@ModelAttribute("article") Article article) {
+		service.save(article);
 		
 		return "redirect:/";
 	}
 	
 	@RequestMapping("/edit/{id}")
-	public ModelAndView showEditProductForm(@PathVariable(name = "id") Long id) {
-		ModelAndView mav = new ModelAndView("edit_product");
+	public ModelAndView showEditArticleForm(@PathVariable(name = "id") Integer id) {
+		ModelAndView mav = new ModelAndView("edit_article");
 		
-		Product product = service.get(id);
-		mav.addObject("product", product);
+		Article article = service.get(id);
+		mav.addObject("article", article);
 		
 		return mav;
 	}	
 	
 	@RequestMapping("/delete/{id}")
-	public String deleteProduct(@PathVariable(name = "id") Long id) {
+	public String deleteArticle(@PathVariable(name = "id") Integer id) {
 		service.delete(id);
 		
 		return "redirect:/";
