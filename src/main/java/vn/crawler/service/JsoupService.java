@@ -22,22 +22,29 @@ import java.util.stream.Collectors;
 @Service
 @Log4j2
 public class JsoupService implements IJsoupService {
-    private static final Logger log = LoggerFactory.getLogger(JsoupService.class);
     private final ArticleRepository articleRepository;
 
     public JsoupService(ArticleRepository articleRepository) {
         this.articleRepository = articleRepository;
     }
 
-    public Document getDocument(String url) throws IOException {
-        return Jsoup.connect(url).
-                userAgent("Mozilla/5.0")
-                .parser(new Parser(new HtmlTreeBuilder()))
-                .get();
+    public Document getDocument(String url)  {
+        try {
+            return Jsoup.connect(url).
+                    userAgent("Mozilla/5.0")
+                    .parser(new Parser(new HtmlTreeBuilder()))
+                    .get();
+        } catch (IOException e) {
+            return null;
+        }
     }
     @Override
-    public List<Article> crawlData(String url) throws IOException {
+    public List<Article> crawlData(String url) {
         Document document = getDocument(url);
+        if (document == null) {
+            log.info("cannot connected");
+            return null;
+        }
         Elements articles = document.getElementsByClass("ipsDataItem_main");
         List<Article> article = articles.stream()
                 .map(s -> {
@@ -49,12 +56,7 @@ public class JsoupService implements IJsoupService {
                             .first()
                             .select("time").first();
                     Document contentDocument = null;
-                    try {
-                        contentDocument = getDocument(titleElement.attr("href"));
-                    } catch (IOException e) {
-                        log.info("cannot connect");
-                        return new Article();
-                    }
+                    contentDocument = getDocument(titleElement.attr("href"));
                     Element contentElement = contentDocument.getElementsByClass("ipsType_normal ipsType_richText ipsPadding_bottom ipsContained")
                             .first();
                     String content = contentElement.select("span").stream().map(span -> span.text())
@@ -75,6 +77,10 @@ public class JsoupService implements IJsoupService {
     @Override
     public List<Article> crawlNewData(String url) throws IOException {
         Document document = getDocument(url);
+        if (document == null) {
+            log.info("cannot connected");
+            return null;
+        }
         Elements articles = document.getElementsByClass("td-module-meta-info");
         List<Article> article = articles.stream()
                 .map(s -> {
@@ -86,13 +92,8 @@ public class JsoupService implements IJsoupService {
                             .select("time").first();
                     ;
                     Document contentDocument = null;
-                    try {
-                        contentDocument = getDocument(titleElement.select("a[href]").first().attr("href"));
-                    } catch (IOException e) {
-                        log.info("cannot connect");
-                        return new Article();
-                    }
-                    Element contentElement = contentDocument.getElementsByClass("td-post-content tagdiv-type").first();
+                    contentDocument = getDocument(titleElement.select("a[href]").first().attr("href"));
+                    Element contentElement =contentDocument != null ? contentDocument.getElementsByClass("td-post-content tagdiv-type").first() : null;
                     String content = contentElement != null ? contentElement.select("p").stream().map(p -> p.text())
                             .collect(Collectors.joining()) : "";
                     Article articleNew = new Article();
@@ -110,6 +111,10 @@ public class JsoupService implements IJsoupService {
    @Override
     public List<Article> crawlNewData2(String url) throws IOException {
         Document document = getDocument(url);
+       if (document == null) {
+           log.info("cannot connected");
+           return null;
+       }
         Elements articles = document.getElementsByClass("jeg_postblock_content");
         List<Article> article = articles.stream()
                 .map(s -> {
@@ -120,12 +125,8 @@ public class JsoupService implements IJsoupService {
                             .first()
                     ;
                     Document contentDocument = null;
-                    try {
-                        contentDocument = getDocument(titleElement.select("a[href]").first().attr("href"));
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                    Element contentElement = contentDocument.getElementsByClass("content-inner").first();
+                    contentDocument = getDocument(titleElement.select("a[href]").first().attr("href"));
+                    Element contentElement = contentDocument != null ? contentDocument.getElementsByClass("content-inner").first() : null;
                     String content = contentElement != null ? contentElement.select("p").stream().map(p -> p.text())
                             .collect(Collectors.joining()) : "";
                     Article articleNew = new Article();
