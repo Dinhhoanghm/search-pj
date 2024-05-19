@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Log4j2
-public class JsoupService implements IJsoupService {
+public class    JsoupService implements IJsoupService {
     private final ArticleRepository articleRepository;
 
     public JsoupService(ArticleRepository articleRepository) {

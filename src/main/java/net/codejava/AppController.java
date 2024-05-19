@@ -25,6 +25,12 @@ public class AppController {
 		
 		return "index";
 	}
+	@RequestMapping("/detail/{id}")
+	public String viewDetailPage(Model model, @PathVariable("id") Integer id) {
+		Article article = service.get(id);
+		model.addAttribute("article", article);
+		return "detail_article";
+	}
 	
 	@RequestMapping("/new")
 	public String showNewArticleForm(Model model) {

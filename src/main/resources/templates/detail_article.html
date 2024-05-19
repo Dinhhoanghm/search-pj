@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Article Detail</title>
+</head>
+<body>
+<div align="center">	
+		
+	<h1>Article Detail</h1>
+
+	<table border="1" cellpadding="10">
+		<thead>
+			<tr>
+				<th>Content</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:object="${article}">
+				<td th:text="${article.content == null ? 'not found' : article.content}">Content</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+</body>
+</html>

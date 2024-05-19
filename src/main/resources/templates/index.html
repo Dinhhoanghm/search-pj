@@ -5,12 +5,12 @@
 <title>Article Manager</title>
 </head>
 <body>
-<div align="center">	
-		
+<div align="center" >
+
 	<h1>Article Manager</h1>
-	
+
 	<a href="new">Create New Article</a>
-	
+
 	<br/><br/>
 	<form th:action="@{/}">
 		Filter: <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
@@ -20,18 +20,18 @@
 		<input type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
 	</form>
 	<br/><br/>
-	
+
 	<table border="1" cellpadding="10">
 		<thead>
 			<tr>
 				<th>Article ID</th>
 				<th>Title</th>
 				<th>Author</th>
-				<th>Content</th>
+				<th>Detail</th>
 				<th>Date</th>
 				<th>Link</th>
 
-				<th>Actions</th>				
+				<th>Actions</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -39,7 +39,9 @@
 				<td th:text="${article.id == null ? 'not found' : article.id}">Article ID</td>
 				<td th:text="${article.title == null ? 'not found' : article.title}">Title</td>
 				<td th:text="${article.author == null ? 'not found' : article.author}">Author</td>
-				<td th:text="${article.content == null ? 'not found' : article.content}">Content</td>
+                <td>
+                    <a th:href="@{'/detail/' + ${article.id}}">Detail</a>
+                </td>
 				<td th:text="${article.date == null ? 'not found' : article.date}">Date</td>
 				<a th:href="${article.link}"><td th:text="${article.link == null ? 'not found' : article.link}">Link</td></a>
 				<td>
