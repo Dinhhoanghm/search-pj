@@ -1,6 +1,6 @@
 spring:
   crawler:
-    url: https://www.the-blockchain.com/?s=blockchain
+    url: https://community.ig.com/forums/forum/35-cryptocurrency-and-blockchain/
     url2: https://www.the-blockchain.com/?s=blockchain
     url3: https://www.newsbtc.com/?s=blockchain
     element-classname: entry-body
@@ -8,3 +8,4 @@ spring:
     source-path: /home/hoangdd/Downloads
     file-name: /home/hoangdd/Downloads/test
     element-classname2:  entry-meta
+
