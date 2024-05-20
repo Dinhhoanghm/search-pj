@@ -28,15 +28,6 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
@@ -82,90 +73,10 @@
             <artifactId>jackson-databind</artifactId>
             <version>${jackson.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.opencsv</groupId>
-            <artifactId>opencsv</artifactId>
-            <version>5.3</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jooq</groupId>
-            <artifactId>jooq</artifactId>
-            <version>${jooq.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jooq</groupId>
-            <artifactId>jooq-meta</artifactId>
-            <version>${jooq.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jooq</groupId>
-            <artifactId>jooq-codegen-maven</artifactId>
-            <version>${jooq.version}</version>
-        </dependency>
     </dependencies>
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>properties-maven-plugin</artifactId>
-                <version>1.0-alpha-2</version>
-                <executions>
-                    <!-- Associate the read-project-properties goal with the initialize phase, to read the properties file. -->
-                    <execution>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>read-project-properties</goal>
-                        </goals>
-                        <configuration>
-                            <files>
-                                <file>${database.config}</file>
-                            </files>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.jooq</groupId>
-                <artifactId>jooq-codegen-maven</artifactId>
-
-                <executions>
-                    <execution>
-                        <id>generate-mysql</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <jdbc>
-                                <driver>com.mysql.cj.jdbc.Driver</driver>
-                                <!--suppress UnresolvedMavenProperty -->
-                                <url>${spring.datasource.url}</url>
-                                <!--suppress UnresolvedMavenProperty -->
-                                <user>${spring.datasource.username}</user>
-                                <!--suppress UnresolvedMavenProperty -->
-                                <password>${spring.datasource.password}</password>
-                            </jdbc>
-                            <generator>
-                                <database>
-                                    <inputSchema>News</inputSchema>
-                                </database>
-                                <generate>
-                                    <pojos>true</pojos>
-                                    <instanceFields>false</instanceFields>
-                                    <pojosEqualsAndHashCode>true</pojosEqualsAndHashCode>
-                                    <javaTimeTypes>true</javaTimeTypes>
-                                    <fluentSetters>true</fluentSetters>
-                                </generate>
-                                <target>
-                                    <packageName>crawler/data</packageName>
-                                    <directory>target/generated-sources/jooq</directory>
-                                </target>
-                            </generator>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

@@ -7,11 +7,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.parser.HtmlTreeBuilder;
 import org.jsoup.parser.Parser;
 import org.jsoup.select.Elements;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import vn.crawler.data.Article;
-import vn.crawler.repo.ArticleRepository;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,12 +18,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Log4j2
-public class    JsoupService implements IJsoupService {
-    private final ArticleRepository articleRepository;
-
-    public JsoupService(ArticleRepository articleRepository) {
-        this.articleRepository = articleRepository;
-    }
+public class  JsoupService implements IJsoupService {
 
     public Document getDocument(String url)  {
         try {
@@ -67,7 +59,6 @@ public class    JsoupService implements IJsoupService {
                     articleNew.setLink(titleElement.attr("href"));
                     articleNew.setContent(content);
                     articleNew.setDate(dateElement.attr("datetime"));
-                    articleRepository.insert(articleNew);
                     return articleNew;
 
                 })

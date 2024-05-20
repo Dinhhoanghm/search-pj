@@ -53,39 +53,12 @@ public class CrawlWeb {
 //        System.out.println("success");
 //    }
 
-    //    @PostConstruct
-//    public void crawlerNewWeb() throws IOException {
-//
-//        List<Article> articles = jsoupService.crawlNewData2(crawlerRequest.getUrl3());
-//        for (int i = 2; i < 958; i++) {
-//            List<Article> articleList = jsoupService.crawlNewData2(String.format("%s%s%s", "https://www.newsbtc.com/page/", i, "/?s=blockchain"));
-//            articles.addAll(articleList);
-//            System.out.println(i);
-//        }
-//        BufferedWriter writer = new BufferedWriter(new FileWriter(crawlerRequest.getFileName()));
-//        System.out.println(articles.size());
-//        articles.stream().forEach(s -> {
-//
-//            try {
-//                writer.write(encode(s) + ",");
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
-//        });
-//        try {
-//            writer.close();
-//        } catch (IOException e) {
-//
-//            throw new RuntimeException(e);
-//        }
-//        System.out.println("success");
-//    }
     @PostConstruct
-    public void crawlerNewWeb2() throws IOException {
+    public void crawlerNewWeb() throws IOException {
 
-        List<Article> articles = jsoupService.crawlNewData(crawlerRequest.getUrl2());
-        for (int i = 2; i < 649; i++) {
-            List<Article> articleList = jsoupService.crawlNewData(String.format("%s%s%s", "https://www.the-blockchain.com/page/", i, "/?s=blockchain"));
+        List<Article> articles = jsoupService.crawlNewData2(crawlerRequest.getUrl3());
+        for (int i = 2; i < 3; i++) {
+            List<Article> articleList = jsoupService.crawlNewData2(String.format("%s%s%s", "https://www.newsbtc.com/page/", i, "/?s=blockchain"));
             articles.addAll(articleList);
             System.out.println(i);
         }
@@ -107,5 +80,32 @@ public class CrawlWeb {
         }
         System.out.println("success");
     }
+//    @PostConstruct
+//    public void crawlerNewWeb2() throws IOException {
+//
+//        List<Article> articles = jsoupService.crawlNewData(crawlerRequest.getUrl2());
+//        for (int i = 2; i < 649; i++) {
+//            List<Article> articleList = jsoupService.crawlNewData(String.format("%s%s%s", "https://www.the-blockchain.com/page/", i, "/?s=blockchain"));
+//            articles.addAll(articleList);
+//            System.out.println(i);
+//        }
+//        BufferedWriter writer = new BufferedWriter(new FileWriter(crawlerRequest.getFileName()));
+//        System.out.println(articles.size());
+//        articles.stream().forEach(s -> {
+//
+//            try {
+//                writer.write(encode(s) + ",");
+//            } catch (IOException e) {
+//                throw new RuntimeException(e);
+//            }
+//        });
+//        try {
+//            writer.close();
+//        } catch (IOException e) {
+//
+//            throw new RuntimeException(e);
+//        }
+//        System.out.println("success");
+//    }
 
 }
